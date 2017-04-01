@@ -10,6 +10,9 @@ function addNames(name, img){
     var createEmpty = document.createElement("div");
     createEmpty.className = "empty";
     targetContent.appendChild(createEmpty);
+    var createLine = document.createElement("HR");
+    createLine.id = "line"
+    createEmpty.appendChild(createLine);
     var createName = document.createElement("div");
     createName.className = "shoppingName";
     createName.innerHTML = name[i].product;
@@ -19,8 +22,54 @@ function addNames(name, img){
     createImage.src = img[i];
     createEmpty.appendChild(createImage);
     createImage.width = 120;
+    var createPrice = document.createElement("div");
+    createPrice.className = "price";
+    createPrice.innerHTML = name[i].price;
+    createEmpty.appendChild(createPrice);
+    var createDesc = document.createElement("div");
+    createDesc.className = "desc"
+    createDesc.innerHTML = name[i].description;
+    createEmpty.appendChild(createDesc);
   }
 }
 
 addNames(products, images);
+
+var targetEmpty = document.getElementsByClassName("empty");
+
+for(var i = 0; i<targetEmpty.length; i++){
+  targetEmpty[i].addEventListener("click", showDesc);
+}
+
+function showDesc(){
+  var getDesc = this.querySelectorAll(".desc")[0];
+  if(getDesc.style.display === "none"){
+    getDesc.style.display = "block";
+  }else{
+    getDesc.style.display = "none";
+  }
+}
+
+
+
+var createSub = document.createElement("div");
+createSub.id = "subtotal";
+createSub.innerHTML = "Subtotal"
+document.body.appendChild(createSub);
+
+function addEverything(price){
+  var c = 0;
+  for(var i = 0; i<price.length; i++){
+    c += price[i].price;
+  }
+  return c;
+}
+
+
+
+var totalCost = document.createElement("div");
+totalCost.id = "total";
+totalCost.innerHTML = addEverything(products);
+subtotal.appendChild(totalCost);
+
 
